@@ -41,3 +41,5 @@ next-env.d.ts
 
 # Temporary files
 /tmp
+
+docker-compose.yml
