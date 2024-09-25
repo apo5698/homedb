@@ -24,9 +24,7 @@ const formSchema = z.object({
   metric: z.string(),
 });
 
-const onSubmit = (values: z.infer<typeof formSchema>) => {
-  console.log(values);
-};
+const onSubmit = (values: z.infer<typeof formSchema>) => {};
 
 export const DataForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({

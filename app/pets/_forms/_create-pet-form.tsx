@@ -41,9 +41,7 @@ const Pets = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
+  const onSubmit = (values: z.infer<typeof formSchema>) => {};
 
   return (
     <Form {...form}>
