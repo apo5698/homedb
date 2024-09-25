@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "pets"
+    ALTER COLUMN "birth_date" SET DATA TYPE TIMESTAMP(3),
+    ALTER COLUMN "adopt_date" SET DATA TYPE TIMESTAMP(3);

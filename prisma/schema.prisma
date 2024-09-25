@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Bath {
+  id    Int      @id @default(autoincrement())
+  petId Int      @map("pet_id")
+  pet   Pet      @relation(fields: [petId], references: [id])
+  time  DateTime
+
+  @@map("baths")
+}
+
+model Breed {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  pets Pet[]
+
+  @@map("breeds")
+}
+
+model Pet {
+  id        Int      @id @default(autoincrement())
+  name      String
+  breedId   Int      @map("breed_id")
+  breed     Breed    @relation(fields: [breedId], references: [id])
+  birthDate DateTime @map("birth_date")
+  adoptDate DateTime @map("adopt_date")
+
+  baths   Bath[]
+  weights Weight[]
+
+  @@map("pets")
+}
+
+model Weight {
+  id     Int      @id @default(autoincrement())
+  petId  Int      @map("pet_id")
+  pet    Pet      @relation(fields: [petId], references: [id])
+  weight Float
+  time   DateTime
+
+  @@map("weights")
+}
