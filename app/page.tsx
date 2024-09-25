@@ -1,7 +1,7 @@
-import { DataForm } from "@/app/data_form";
+import { redirect } from "next/navigation";
 
 const Home = async () => {
-  return <DataForm />;
+  redirect("/pets");
 };
 
 export default Home;
