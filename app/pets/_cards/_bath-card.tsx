@@ -24,7 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DATE_FORMAT, DATETIME_FORMAT, fetcher } from "@/lib/utils";
-import { Pet } from "@prisma/client";
+import { Bath, Pet } from "@prisma/client";
 import axios from "axios";
 import { differenceInDays, format } from "date-fns";
 import { LoaderCircleIcon } from "lucide-react";
@@ -33,12 +33,17 @@ import { toast } from "sonner";
 import useSWR from "swr";
 
 const BathCard = ({ pet }: { pet: Pet }) => {
-  const [submitting, setSubmitting] = useState(false);
-
   const { data, error, isLoading, mutate } = useSWR<Bath[]>(
     `/api/pets/${pet.id}/baths`,
     fetcher,
   );
+
+  if (error) {
+    console.error("Error:", error);
+    toast.error("Error", { description: error.message });
+  }
+
+  const [submitting, setSubmitting] = useState(false);
 
   const lastDate = useMemo(
     () => (data?.length ? new Date(data[0].time) : null),
@@ -61,11 +66,6 @@ const BathCard = ({ pet }: { pet: Pet }) => {
 
         if (error.response) {
           message = error.response.data.error;
-        } else if (error.request) {
-          message = "No response received";
-          console.error(error.request);
-        } else {
-          message = error.message;
         }
 
         console.error("Error:", message);

@@ -45,7 +45,7 @@ import {
 } from "@/components/ui/table";
 import { cn, DATE_FORMAT, DATETIME_FORMAT, fetcher } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Pet } from "@prisma/client";
+import { Pet, Weight } from "@prisma/client";
 import axios from "axios";
 import { differenceInDays, format } from "date-fns";
 import { LoaderCircleIcon, PlusIcon, WeightIcon } from "lucide-react";
@@ -75,13 +75,18 @@ const WeightCard = ({ pet }: { pet: Pet }) => {
     fetcher,
   );
 
+  if (error) {
+    console.error("Error:", error);
+    toast.error("Error", { description: error.message });
+  }
+
   const [visibleData, setVisibleData] = useState<Weight[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const pageSize = 5;
 
   useEffect(() => {
-    if (data) {
+    if (Array.isArray(data)) {
       setVisibleData(data.slice(0, pageSize));
     }
   }, [data]);
@@ -117,11 +122,6 @@ const WeightCard = ({ pet }: { pet: Pet }) => {
 
         if (error.response) {
           message = error.response.data.error;
-        } else if (error.request) {
-          message = "No response received";
-          console.error(error.request);
-        } else {
-          message = error.message;
         }
 
         console.error("Error:", message);
