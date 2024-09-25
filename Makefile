@@ -5,5 +5,5 @@ build:
 	docker build -t $(IMAGE_NAME) .
 
 push:
-	docker tag $(IMAGE_NAME):$(VERSION) $(IMAGE_NAME):$(VERSION)
-	docker push $(IMAGE_NAME):$(VERSION)
+	docker tag $(IMAGE_NAME) $(IMAGE_NAME)
+	docker push $(IMAGE_NAME)
