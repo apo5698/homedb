@@ -15,7 +15,7 @@ export const GET = async (
     })
     .then((baths) => NextResponse.json(baths))
     .catch((error: any) => {
-      console.error(error.code);
+      console.error(error);
 
       if (error.code === "P2003") {
         return NextResponse.json(
