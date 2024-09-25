@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Bath, PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (
@@ -13,7 +13,7 @@ export const GET = async (
       where: { petId },
       orderBy: { time: "desc" },
     })
-    .then((baths) => NextResponse.json(baths))
+    .then((baths: Bath[]) => NextResponse.json(baths))
     .catch((error: any) => {
       console.error(error.code);
 
