@@ -83,7 +83,7 @@ const WeightCard = ({ pet }: { pet: Pet }) => {
   const [visibleData, setVisibleData] = useState<Weight[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const pageSize = 5;
+  const pageSize = 10;
 
   useEffect(() => {
     if (Array.isArray(data)) {
