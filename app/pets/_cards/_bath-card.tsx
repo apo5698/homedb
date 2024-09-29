@@ -27,7 +27,7 @@ import { DATE_FORMAT, DATETIME_FORMAT, fetcher } from "@/lib/utils";
 import { Bath, Pet } from "@prisma/client";
 import axios from "axios";
 import { differenceInDays, format } from "date-fns";
-import { LoaderCircleIcon } from "lucide-react";
+import { CheckIcon, LoaderCircleIcon } from "lucide-react";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import useSWR from "swr";
@@ -155,8 +155,10 @@ const BathCard = ({ pet }: { pet: Pet }) => {
           disabled={submitting}
           onClick={onCreate}
         >
-          {submitting && (
+          {submitting ? (
             <LoaderCircleIcon className="mr-1 h-4 w-4 animate-spin" />
+          ) : (
+            <CheckIcon className="mr-1 h-4 w-4" />
           )}
           Taken
         </Button>
