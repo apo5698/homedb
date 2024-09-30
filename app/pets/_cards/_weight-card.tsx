@@ -200,8 +200,7 @@ const WeightCard = ({ pet }: { pet: Pet }) => {
           <TableHeader>
             <TableRow>
               <TableHead>Date</TableHead>
-              <TableHead>Weight (lbs)</TableHead>
-              <TableHead className="text-right">Difference</TableHead>
+              <TableHead className="text-right">Weight (lbs)</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -222,22 +221,23 @@ const WeightCard = ({ pet }: { pet: Pet }) => {
                       </p>
                     </div>
                   </TableCell>
-                  <TableCell>{record.weight}</TableCell>
-                  <TableCell
-                    className={cn(
-                      "text-right",
-                      weightDiff !== null && weightDiff !== 0
-                        ? weightDiff > 0
-                          ? "text-green-600 dark:text-green-400"
-                          : "text-red-600 dark:text-red-400"
-                        : "",
-                    )}
-                  >
-                    {weightDiff !== null
-                      ? weightDiff !== 0
-                        ? weightDiff.toFixed(1)
-                        : "-"
-                      : null}
+                  <TableCell className="text-right">
+                    <span>{record.weight}</span> (
+                    <span
+                      className={cn(
+                        "text-right",
+                        weightDiff !== null && weightDiff !== 0
+                          ? weightDiff > 0
+                            ? "text-green-600 dark:text-green-400"
+                            : "text-red-600 dark:text-red-400"
+                          : "",
+                      )}
+                    >
+                      {weightDiff !== null && weightDiff !== 0
+                        ? (weightDiff > 0 ? "+" : "") + weightDiff.toFixed(1)
+                        : "-"}
+                    </span>
+                    )
                   </TableCell>
                 </TableRow>
               );
