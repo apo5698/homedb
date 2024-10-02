@@ -55,7 +55,7 @@ const BathCard = ({ pet }: { pet: Pet }) => {
     const now = new Date();
 
     axios
-      .post(`/api/pets/${pet.id}/bath`, { time: now })
+      .post(`/api/pets/${pet.id}/baths`, { time: now })
       .then(() => {
         toast.success(`Bath taken for ${pet.name}`, {
           description: format(now, DATETIME_FORMAT),
